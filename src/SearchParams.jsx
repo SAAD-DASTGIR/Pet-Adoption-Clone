@@ -1,5 +1,6 @@
 import React from "react";
 import Pet from "./Pet";
+import useBreedlist from "./useBreedlist.js";
 import { useState,useEffect } from "react";
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
@@ -8,7 +9,7 @@ const SearchParams = () => {
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
   const [pets ,setpets]= useState([])
-  const breeds = [];
+  const [breeds] = useBreedlist(animal);
 useEffect(()=>{
     requestPets()
 },[])
@@ -20,7 +21,7 @@ async function requestPets(){
     const json = await res.json()
     setpets(json.pets)
 }
-
+console.log(breeds)
   return (
     <div className="search-params">
       <form 
